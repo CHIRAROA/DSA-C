@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graphs</title>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+        .box {
+            margin: 20px;
+            padding: 20px;
+            box-shadow: 1px 1px 7px 1px black;
+            font-size: 18px;
+        }
+        .box a {
+            text-decoration: none;
+            color: black;
+        }
+        .box a:hover {
+            color: rgb(44, 83, 143);
+        }
+        .box1 pre {
+            background-color:  #2F4F4F;
+            color: white;
+        }
+        .box2 pre{
+            background-color: black;
+            color: white;
+        }
+        .button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;   
+        }
+        .button button {
+            padding: 10px 15px; 
+            background-color: #1A2A6C; 
+            color: white; 
+            border: none; 
+            border-radius: 5px; 
+            cursor: pointer;
+        }
+        .button button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>GRAPHS</h1>
+    </div>
+    <div class="box">
+        <ol>
+            <li><a href="#code1">ENTER THE VERTICES AND EDGES AND REPRESENT IN ADJACENCY MATRIX AND PRINT IT?</a></li>
+            <li><a href="#code2">CREATE THE GRAPH AS A ADJACENCY LIST WITH OPERATIONS SUCH AS INSERTION, DELETION?</a></li>
+            <li><a href="#code3">TRAVERSE THE ADJACENT MATRIX WITH DEPTH FIRST SEARCH?</a></li>
+            <li><a href="#code4">TRAVERSE THE ADJACENT LIST WITH DEPTH FIRST SEARCH?</a></li>
+            <li><a href="#code5">TRAVERSE THE ADJACENT MATRIX WITH BREADTH FIRST SEARCH?</a></li>
+            <li><a href="#code6">TRAVERSE THE ADJACENT LIST WITH BREADTH FIRST SEARCH?</a></li>
+        </ol>
+    
+    </div>
+    
+    <div class="box">
+            
+            <h2 id="code">Code: </h2>
+            <strong> ENTER THE VERTICES AND EDGES AND REPRESENT IN ADJACENCY MATRIX AND PRINT IT.</strong>
+            <div class="box1">
+                <pre>
+
+#include &lt;stdio.h&gt;
+
+int main() {
+int vertices, edges;
+
+printf("Enter the number of vertices in the graph: ");
+scanf("%d", &vertices);
+
+printf("Enter the number of edges in the graph: ");
+scanf("%d", &edges);
+
+int adjacencyMatrix[vertices][vertices];
+
+for (int i = 0; i &lt; vertices; i++) {
+    for (int j = 0; j &lt; vertices; j++) {
+        adjacencyMatrix[i][j] = 0;
+    }
+}
+
+for (int i = 0; i &lt; edges; i++) {
+    int source, destination;
+    printf("Enter edge %d (source destination): ", i + 1);
+    scanf("%d %d", &source, &destination);
+
+    if (source &gt;= 0 && source &lt; vertices && destination &gt;= 0 && destination &lt; vertices) {
+        adjacencyMatrix[source][destination] = 1;
+        adjacencyMatrix[destination][source] = 1;
+    } else {
+        printf("Invalid vertex indices. Please enter valid indices.\n");
+        i--;
+    }
+}
+
+printf("Adjacency Matrix:\n");
+for (int i = 0; i &lt; vertices; i++) {
+    for (int j = 0; j &lt; vertices; j++) {
+        printf("%d ", adjacencyMatrix[i][j]);
+    }
+    printf("\n");
+}
+
+return 0;
+}
+
+                </pre>
+            </div>
+            <h2>Output: </h2>
+            <div class="box2">
+                <pre>
+
+Enter the number of vertices in the graph: 3
+Enter the number of edges in the graph: 3
+Enter edge 1 (source destination): 0 1
+Enter edge 2 (source destination): 1 2
+Enter edge 3 (source destination): 0 2
+Adjacency Matrix:
+0 1 1 
+1 0 1 
+1 1 0 
+    
+                </pre>
+            </div>
+            
+            
+            <h2 id="code2">Code: </h2>
+            <strong> CREATE THE GRAPH AS A ADJACENCY LIST WITH OPERATIONS SUCH AS INSERTION, DELETION</strong>
+            <div class="box1">
+                <pre>
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+struct Node {
+int data;
+struct Node* next;
+};
+
+struct Graph {
+int V;
+struct Node** adjList;
+};
+
+struct Node* createNode(int data) {
+struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+newNode-&gt;data = data;
+newNode-&gt;next = NULL;
+return newNode;
+}
+
+struct Graph* createGraph(int V) {
+struct Graph* graph = (struct Graph*)malloc(sizeof(struct Graph));
+graph-&gt;V = V;
+graph-&gt;adjList = (struct Node**)malloc(V * sizeof(struct Node*));
+
+for (int i = 0; i &lt; V; i++) {
+    graph-&gt;adjList[i] = NULL;
+}
+
+return graph;
+}
+
+void addEdge(struct Graph* graph, int src, int dest) {
+struct Node* newNode = createNode(dest);
+newNode-&gt;next = graph-&gt;adjList[src];
+graph-&gt;adjList[src] = newNode;
+
+newNode = createNode(src);
+newNode-&gt;next = graph-&gt;adjList[dest];
+graph-&gt;adjList[dest] = newNode;
+}
+
+void deleteEdge(struct Graph* graph, int src, int dest) {
+struct Node* current = graph-&gt;adjList[src];
+struct Node* prev = NULL;
+
+while (current != NULL && current-&gt;data != dest) {
+    prev = current;
+    current = current-&gt;next;
+}
+
+if (current == NULL) {
+    return;
+}
+
+if (prev == NULL) {
+    graph-&gt;adjList[src] = current-&gt;next;
+} else {
+    prev-&gt;next = current-&gt;next;
+}
+
+free(current);
+
+current = graph-&gt;adjList[dest];
+prev = NULL;
+
+while (current != NULL && current-&gt;data != src) {
+    prev = current;
+    current = current-&gt;next;
+}
+
+if (prev == NULL) {
+    graph-&gt;adjList[dest] = current-&gt;next;
+} else {
+    prev-&gt;next = current-&gt;next;
+}
+
+free(current);
+}
+
+void displayGraph(struct Graph* graph) {
+for (int i = 0; i &lt; graph-&gt;V; i++) {
+    struct Node* current = graph-&gt;adjList[i];
+    printf("Adjacency list of vertex %d: ", i);
+    while (current != NULL) {
+        printf("%d -&gt; ", current-&gt;data);
+        current = current-&gt;next;
+    }
+    printf("NULL\n");
+}
+}
+
+int main() {
+int V, E;
+
+printf("Enter the number of vertices: ");
+scanf("%d", &V);
+
+struct Graph* graph = createGraph(V);
+
+printf("Enter the number of edges: ");
+scanf("%d", &E);
+
+for (int i = 0; i &lt; E; i++) {
+    int src, dest;
+    printf("Enter edge %d (source destination): ", i + 1);
+    scanf("%d %d", &src, &dest);
+    addEdge(graph, src, dest);
+}
+
+printf("Graph before deletion:\n");
+displayGraph(graph);
+
+int src, dest;
+printf("Enter edge to delete (source destination): ");
+scanf("%d %d", &src, &dest);
+deleteEdge(graph, src, dest);
+
+printf("Graph after deletion:\n");
+displayGraph(graph);
+
+return 0;
+}
+
+
+                </pre>
+            </div>
+            <h2>Output: </h2>
+            <div class="box2">
+                <pre>
+
+Enter the number of vertices: 4
+Enter the number of edges: 4
+Enter edge 1 (source destination): 0 1
+Enter edge 2 (source destination): 0 2
+Enter edge 3 (source destination): 1 2
+Enter edge 4 (source destination): 2 3
+Graph before deletion:
+Adjacency list of vertex 0: 2 -&gt; 1 -&gt; NULL
+Adjacency list of vertex 1: 2 -&gt; 0 -&gt; NULL
+Adjacency list of vertex 2: 3 -&gt; 1 -&gt; 0 -&gt; NULL
+Adjacency list of vertex 3: 2 -&gt; NULL
+Enter edge to delete (source destination): 0 1
+Graph after deletion:
+Adjacency list of vertex 0: 2 -&gt; NULL
+Adjacency list of vertex 1: NULL
+Adjacency list of vertex 2: 3 -&gt; NULL
+Adjacency list of vertex 3: 2 -&gt; NULL
+
+
+                </pre>
+            </div>
+            
+            <h2 id="code3">Code: </h2>
+            <strong>TRAVERSE THE ADJACENT MATRIX WITH DEPTH FIRST SEARCH</strong>
+            <div class="box1">
+                <pre>
+
+#include &lt;stdio.h&gt;
+
+void depthFirstSearch(int vertex, int V, int adjacencyMatrix[V][V], int visited[]) {
+printf("%d ", vertex);
+visited[vertex] = 1;
+
+for (int i = 0; i &lt; V; i++) {
+    if (adjacencyMatrix[vertex][i] == 1 && !visited[i]) {
+        depthFirstSearch(i, V, adjacencyMatrix, visited);
+    }
+}
+}
+
+int main() {
+int V;
+
+printf("Enter the number of vertices: ");
+scanf("%d", &V);
+
+int adjacencyMatrix[V][V];
+
+printf("Enter the adjacency matrix (%d x %d):\n", V, V);
+for (int i = 0; i &lt; V; i++) {
+    for (int j = 0; j &lt; V; j++) {
+        scanf("%d", &adjacencyMatrix[i][j]);
+    }
+}
+
+int visited[V];
+for (int i = 0; i &lt; V; i++) {
+    visited[i] = 0;
+}
+
+printf("Enter the starting vertex for DFS: ");
+int startVertex;
+scanf("%d", &startVertex);
+
+printf("Depth-First Search Traversal starting from vertex %d: ", startVertex);
+depthFirstSearch(startVertex, V, adjacencyMatrix, visited);
+printf("\n");
+
+return 0;
+}
+
+                </pre>
+            </div>
+            <h2>Output: </h2>
+            <div class="box2">
+                <pre>
+
+Enter the number of vertices: 4
+Enter the adjacency matrix (4 x 4):
+0 1 0 1
+1 0 1 0
+0 1 0 0
+1 0 0 0
+Enter the starting vertex for DFS: 0
+Depth-First Search Traversal starting from vertex 0: 0 1 2 3 
+
+                </pre>
+            </div>
+            
+            <h2 id="code4">Code: </h2>
+            <strong>TRAVERSE THE ADJACENT LIST WITH DEPTH FIRST SEARCH</strong>
+            <div class="box1">
+                <pre>
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+struct Node {
+int data;
+struct Node* next;
+};
+
+struct Graph {
+int V;
+struct Node** adjList;
+};
+
+struct Node* createNode(int data) {
+struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+newNode->data = data;
+newNode->next = NULL;
+return newNode;
+}
+
+struct Graph* createGraph(int V) {
+struct Graph* graph = (struct Graph*)malloc(sizeof(struct Graph));
+graph->V = V;
+graph->adjList = (struct Node**)malloc(V * sizeof(struct Node*));
+
+for (int i = 0; i &lt; V; i++) {
+    graph->adjList[i] = NULL;
+}
+
+return graph;
+}
+
+void addEdge(struct Graph* graph, int src, int dest) {
+struct Node* newNode = createNode(dest);
+newNode-&gt;next = graph->adjList[src];
+graph->adjList[src] = newNode;
+
+newNode = createNode(src);
+newNode-&gt;next = graph->adjList[dest];
+graph->adjList[dest] = newNode;
+}
+
+void depthFirstSearch(struct Graph* graph, int vertex, int visited[]) {
+visited[vertex] = 1;
+printf("%d ", vertex);
+
+struct Node* current = graph->adjList[vertex];
+while (current != NULL) {
+    if (!visited[current->data]) {
+        depthFirstSearch(graph, current->data, visited);
+    }
+    current = current->next;
+}
+}
+
+int main() {
+int V, E;
+
+printf("Enter the number of vertices: ");
+scanf("%d", &V);
+
+struct Graph* graph = createGraph(V);
+
+printf("Enter the number of edges: ");
+scanf("%d", &E);
+
+for (int i = 0; i &lt; E; i++) {
+    int src, dest;
+    printf("Enter edge %d (source destination): ", i + 1);
+    scanf("%d %d", &src, &dest);
+    addEdge(graph, src, dest);
+}
+
+printf("Enter the starting vertex for DFS: ");
+int startVertex;
+scanf("%d", &startVertex);
+
+int visited[V];
+for (int i = 0; i &lt; V; i++) {
+    visited[i] = 0;
+}
+
+printf("Depth-First Search Traversal starting from vertex %d: ", startVertex);
+depthFirstSearch(graph, startVertex, visited);
+printf("\n");
+
+return 0;
+}
+
+                </pre>
+            </div>
+            <h2>Output: </h2>
+            <div class="box2">
+                <pre>
+
+Enter the number of vertices: 5
+Enter the number of edges: 4
+Enter edge 1 (source destination): 0 1
+Enter edge 2 (source destination): 0 4
+Enter edge 3 (source destination): 1 3
+Enter edge 4 (source destination): 1 2
+Enter the starting vertex for DFS: 0
+Depth-First Search Traversal starting from vertex 0: 0 1 3 2 4 
+
+                </pre>
+            </div>
+            
+            <h2 id="code5">Code: </h2>
+            <strong>TRAVERSE THE ADJACENT MATRIX WITH BREADTH FIRST SEARCH</strong>
+            <div class="box1">
+                <pre>
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+void breadthFirstSearch(int startVertex, int V, int adjacencyMatrix[V][V], int visited[]) {
+int queue[V];
+int front = -1, rear = -1;
+
+printf("Breadth-First Search Traversal starting from vertex %d: ", startVertex);
+
+visited[startVertex] = 1;
+queue[++rear] = startVertex;
+
+while (front != rear) {
+    int currentVertex = queue[++front];
+    printf("%d ", currentVertex);
+
+    for (int i = 0; i &lt; V; i++) {
+        if (adjacencyMatrix[currentVertex][i] == 1 && !visited[i]) {
+            visited[i] = 1;
+            queue[++rear] = i;
+        }
+    }
+}
+
+printf("\n");
+}
+
+int main() {
+int V;
+
+printf("Enter the number of vertices: ");
+scanf("%d", &V);
+
+int adjacencyMatrix[V][V];
+
+printf("Enter the adjacency matrix (%d x %d):\n", V, V);
+for (int i = 0; i &lt; V; i++) {
+    for (int j = 0; j &lt; V; j++) {
+        scanf("%d", &adjacencyMatrix[i][j]);
+    }
+}
+
+int visited[V];
+for (int i = 0; i &lt; V; i++) {
+    visited[i] = 0;
+}
+
+int startVertex;
+printf("Enter the starting vertex for BFS: ");
+scanf("%d", &startVertex);
+
+breadthFirstSearch(startVertex, V, adjacencyMatrix, visited);
+
+return 0;
+}
+
+                </pre>
+            </div>
+            <h2>Output: </h2>
+            <div class="box2">
+                <pre>
+
+Enter the number of vertices: 5
+Enter the adjacency matrix (5 x 5):
+0 1 0 0 1
+1 0 1 1 0
+0 1 0 0 0
+0 1 0 0 0
+1 0 0 0 0
+Enter the starting vertex for BFS: 0
+Breadth-First Search Traversal starting from vertex 0: 0 1 4 2 3 
+
+
+                </pre>
+            </div>
+            
+            <h2 id="code6">Code: </h2>
+            <strong>TRAVERSE THE ADJACENT LIST WITH BREADTH FIRST SEARCH</strong>
+            <div class="box1">
+                <pre>
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+struct Node {
+int data;
+struct Node* next;
+};
+
+struct Graph {
+int V;
+struct Node** adjList;
+};
+
+struct Node* createNode(int data) {
+struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+newNode->data = data;
+newNode->next = NULL;
+return newNode;
+}
+
+struct Graph* createGraph(int V) {
+struct Graph* graph = (struct Graph*)malloc(sizeof(struct Graph));
+graph->V = V;
+graph->adjList = (struct Node**)malloc(V * sizeof(struct Node*));
+
+for (int i = 0; i &lt; V; i++) {
+    graph->adjList[i] = NULL;
+}
+
+return graph;
+}
+
+void addEdge(struct Graph* graph, int src, int dest) {
+struct Node* newNode = createNode(dest);
+newNode-&gt;next = graph->adjList[src];
+graph->adjList[src] = newNode;
+
+newNode = createNode(src);
+newNode-&gt;next = graph->adjList[dest];
+graph->adjList[dest] = newNode;
+}
+
+void breadthFirstSearch(struct Graph* graph, int startVertex, int visited[]) {
+int queue[graph->V];
+int front = -1, rear = -1;
+
+printf("Breadth-First Search Traversal starting from vertex %d: ", startVertex);
+
+visited[startVertex] = 1;
+queue[++rear] = startVertex;
+
+while (front != rear) {
+    int currentVertex = queue[++front];
+    printf("%d ", currentVertex);
+
+    struct Node* current = graph->adjList[currentVertex];
+    while (current != NULL) {
+        if (!visited[current->data]) {
+            visited[current->data] = 1;
+            queue[++rear] = current->data;
+        }
+        current = current-&gt;next;
+    }
+}
+
+printf("\n");
+}
+
+int main() {
+int V, E;
+
+printf("Enter the number of vertices: ");
+scanf("%d", &V);
+
+struct Graph* graph = createGraph(V);
+
+printf("Enter the number of edges: ");
+scanf("%d", &E);
+
+for (int i = 0; i &lt; E; i++) {
+    int src, dest;
+    printf("Enter edge %d (source destination): ", i + 1);
+    scanf("%d %d", &src, &dest);
+    addEdge(graph, src, dest);
+}
+
+int visited[V];
+for (int i = 0; i &lt; V; i++) {
+    visited[i] = 0;
+}
+
+int startVertex;
+printf("Enter the starting vertex for BFS: ");
+scanf("%d", &startVertex);
+
+breadthFirstSearch(graph, startVertex, visited);
+
+return 0;
+}
+
+                </pre>
+            </div>
+            <h2>Output: </h2>
+            <div class="box2">
+                <pre>
+
+Enter the number of vertices: 5
+Enter the number of edges: 4
+Enter edge 1 (source destination): 0 1
+Enter edge 2 (source destination): 0 4
+Enter edge 3 (source destination): 1 2
+Enter edge 4 (source destination): 1 3
+Enter the starting vertex for BFS: 0
+Breadth-First Search Traversal starting from vertex 0: 0 1 4 2 3 
+
+                </pre>
+            </div>
+
+    </div>
+
+
+
+
+
+
+
+
+    <div class="button">
+        <a href="#top"><button>TOP</button></a>
+    </div>
+</body>
+
+</html>

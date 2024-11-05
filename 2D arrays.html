@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2D Array</title>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+        .box {
+            margin: 20px;
+            padding: 20px;
+            box-shadow: 1px 1px 7px 1px black;
+            font-size: 18px;
+        }
+        .box a {
+            text-decoration: none;
+            color: black;
+        }
+        .box a:hover {
+            color: rgb(44, 83, 143);
+        }
+        .box1 pre {
+            background-color:  #2F4F4F;
+            color: white;
+        }
+        .box2 pre{
+            background-color: black;
+            color: white;
+        }
+        .button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;   
+        }
+        .button button {
+            padding: 10px 15px; 
+            background-color: #1A2A6C; 
+            color: white; 
+            border: none; 
+            border-radius: 5px; 
+            cursor: pointer;
+        }
+        .button button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+
+<body>
+    
+    <div class="header" id="top">
+        <h1>2D ARRAYS</h1>
+    </div>
+    <div class="box">
+        <ol>
+            <li><a href="#code1">Enter a matrix of 4 rows and 2 columns from the user display it in matrix format?</a></li>
+            <li><a href="#code2">Enter two Matrices from user, add the matrices and display the answer?</a></li>
+            <li><a href="#code3">Enter two Matrices from user, subtract the matrices and display the answer?</a></li>
+            <li><a href="#code4">Enter two Matrices from user, multiply the matrices and display the answer?</a></li>
+            <li><a href="#code5">Enter a Matrix from user, copy it in another matrix of same size?</a></li>
+            <li><a href="#code6">Enter the Matrix from user, multiply it with a scalar value and display the answer?</a></li>
+            <li><a href="#code7">Create a tic tac toe game using 2D Arrays.</a></li>
+        </ol>
+    </div>
+    
+    <div class="box">
+        <h2 id="code1">Code: </h2>
+        <strong>1. Enter a matrix of 4 rows and 2 columns from the user display it in matrix format ?</strong>
+        <div class="box1">    
+            <pre>
+#include&lt;stdio.h&gt;
+int main()
+{
+    int arr[4][2],i,j;
+//	taking the input of the matrix from the user
+    printf("Enter the matrix: \n");
+    for(i=0;i&lt;4;i++)
+    {
+        for(j=0;j&lt;2;j++)
+        {
+            printf("Enter the element arr[%d][%d]: ",i,j);
+            scanf("%d",&arr[i][j]);
+        }
+    }
+    printf("The obtained matrix is \n");
+//	Displaying the output to the user
+    for(i=0;i&lt;4;i++)
+    {
+        for(j=0;j&lt;2;j++)
+        {
+            printf("%d\t",arr[i][j]);
+        }
+        printf("\n");
+    }
+    return 0;
+}        
+            </pre>
+        </div>
+        <h2>Output: </h2>
+        <div class="box2">
+            <pre>
+Enter the matrix:
+Enter the element arr[0][0]: 1
+Enter the element arr[0][1]: 2
+Enter the element arr[1][0]: 3
+Enter the element arr[1][1]: 4
+Enter the element arr[2][0]: 5
+Enter the element arr[2][1]: 6
+Enter the element arr[3][0]: 7
+Enter the element arr[3][1]: 8
+The obtained matrix is
+1       2
+3       4
+5       6
+7       8
+            </pre>
+        </div>
+        <h2 id="code2">Code: </h2>
+        <strong>2. Enter two Matrices from user, add the matrices and display the answer ?</strong>    
+        <div class="box1">
+            <pre>
+#include&lt;stdio.h&gt;
+int main()
+{
+	int arr1[3][3],i,j,arr2[3][3],result[3][3];
+//	Input of the first matrix
+	printf("Enter the matrix: \n");
+	for(i=0;i&lt;3;i++)
+	{
+		for(j=0;j&lt;3;j++)
+		{
+			printf("Enter the element arr[%d][%d]: ",i,j);
+			scanf("%d",&arr1[i][j]);
+		}
+	}
+//	Displaying of the first matrix
+	printf("\nThe obtained matrix is \n");
+	for(i=0;i&lt;3;i++)
+	{
+		for(j=0;j&lt;3;j++)
+		{
+			printf("%d\t",arr1[i][j]);
+		}
+		printf("\n");
+	}
+//	Input of the second matrix
+	for(i=0;i&lt;3;i++)
+	{
+		for(j=0;j&lt;3;j++)
+		{
+			printf("Enter the element arr[%d][%d]: ",i,j);
+			scanf("%d",&arr2[i][j]);
+		}
+	}
+	printf("\nThe obtained matrix is \n");
+//	Displaying of the second matrix
+	for(i=0;i&lt;3;i++)
+	{
+		for(j=0;j&lt;3;j++)
+		{
+			printf("%d\t",arr2[i][j]);
+		}
+		printf("\n");
+	}
+	printf("\n\nThe obtained matrix after addition is \n");
+//	Result matrix after the addition
+	for(i=0;i&lt;3;i++)
+	{
+		for(j=0;j&lt;3;j++)
+		{
+			result[i][j]=arr1[i][j]+arr2[i][j];
+			printf("%d\t",result[i][j]);
+		}
+		printf("\n");
+	}
+	return 0;
+}               
+            </pre>
+        </div>
+    <h2>Output: </h2>
+    <div class="box2">
+        <pre>
+Enter the  first matrix:
+Enter the element arr[0][0]: 1
+Enter the element arr[0][1]: 1
+Enter the element arr[0][2]: 1
+Enter the element arr[1][0]: 1
+Enter the element arr[1][1]: 1
+Enter the element arr[1][2]: 1
+Enter the element arr[2][0]: 1
+Enter the element arr[2][1]: 1
+Enter the element arr[2][2]: 1
+
+The obtained matrix is
+1       1       1
+1       1       1
+1       1       1
+
+Enter the elements of the second matrix: 
+Enter the element arr[0][0]: 2
+Enter the element arr[0][1]: 2
+Enter the element arr[0][2]: 2
+Enter the element arr[1][0]: 2
+Enter the element arr[1][1]: 2
+Enter the element arr[1][2]: 2
+Enter the element arr[2][0]: 2
+Enter the element arr[2][1]: 2
+Enter the element arr[2][2]: 2
+
+The obtained matrix is
+2       2       2
+2       2       2
+2       2       2
+
+
+The obtained matrix after addition is
+3       3       3
+3       3       3
+3       3       3
+        </pre>
+    </div>
+    <h2 id="code3">Code: </h2>
+    <strong>Enter two Matrices from user, subtract the matrices and display the answer ?</strong>
+    <div class="box1">
+        <pre>
+#include&lt;stdio.h&gt;
+int main()
+{
+	int arr1[3][3],i,j,arr2[3][3],result[3][3];
+//	Input of the first matrix
+	printf("Enter the matrix: \n");
+	for(i=0;i&lt;3;i++)
+	{
+		for(j=0;j&lt;3;j++)
+		{
+			printf("Enter the element arr[%d][%d]: ",i,j);
+			scanf("%d",&arr1[i][j]);
+		}
+	}
+//	Displaying of the first matrix
+	printf("\nThe obtained matrix is \n");
+	for(i=0;i&lt;3;i++)
+	{
+		for(j=0;j&lt;3;j++)
+		{
+			printf("%d\t",arr1[i][j]);
+		}
+		printf("\n");
+	}
+//	Input of the second matrix
+	printf("\nEnter the elements of the second matrix: \n");
+	for(i=0;i&lt;3;i++)
+	{
+		for(j=0;j&lt;3;j++)
+		{
+			printf("Enter the element arr[%d][%d]: ",i,j);
+			scanf("%d",&arr2[i][j]);
+		}
+	}
+//	Displaying of the second matrix
+	printf("\nThe obtained matrix is \n");
+	for(i=0;i&lt;3;i++)
+	{
+		for(j=0;j&lt;3;j++)
+		{
+			printf("%d\t",arr2[i][j]);
+		}
+		printf("\n");
+	}
+//	Result matrix after the subtraction
+	printf("\n\nThe obtained matrix after subtraction 2nd from 1st matrix is \n");
+	for(i=0;i&lt;3;i++)
+	{
+		for(j=0;j&lt;3;j++)
+		{
+			result[i][j]=arr2[i][j]-arr1[i][j];
+			printf("%d\t",result[i][j]);
+		}
+		printf("\n");
+	}
+	return 0;
+}
+        </pre>
+    </div>
+    <h2>Output:</h2>
+    <div class="box2">
+        <pre>
+Enter the matrix:
+Enter the element arr[0][0]: 1
+Enter the element arr[0][1]: 1
+Enter the element arr[0][2]: 1
+Enter the element arr[1][0]: 1
+Enter the element arr[1][1]: 1
+Enter the element arr[1][2]: 1
+Enter the element arr[2][0]: 1
+Enter the element arr[2][1]: 1
+Enter the element arr[2][2]: 1
+
+The obtained matrix is
+1       1       1
+1       1       1
+1       1       1
+
+Enter the elements of the second matrix:
+Enter the element arr[0][0]: 3
+Enter the element arr[0][1]: 3
+Enter the element arr[0][2]: 3
+Enter the element arr[1][0]: 3
+Enter the element arr[1][1]: 3
+Enter the element arr[1][2]: 3
+Enter the element arr[2][0]: 3
+Enter the element arr[2][1]: 3
+Enter the element arr[2][2]: 3
+
+The obtained matrix is
+3       3       3
+3       3       3
+3       3       3
+
+
+The obtained matrix after subtraction 2nd from 1st matrix is
+2       2       2
+2       2       2
+2       2       2
+        </pre>
+    </div>
+</div>
+<div class="box">
+<h2 id="code4">Code: </h2>
+<strong>Enter two Matrices from user, multiply the matrices and display the answer ?</strong>
+<div class="box1">
+    <pre>
+#include&lt;stdio.h&gt;
+#include&lt;conio.h&gt;
+int main()
+{
+	int a[3][3],i,j,b[3][3],result[3][3],n,element;
+//	Input of the first matrix
+	printf("Enter the matrix: \n");
+	for(i=0;i&lt;3;i++)
+	{
+		for(j=0;j&lt;3;j++)
+		{
+			printf("Enter the element arr[%d][%d]: ",i,j);
+			scanf("%d",&a[i][j]);
+		}
+	}
+//	Displaying of the first matrix
+	printf("\nThe obtained matrix is \n");
+	for(i=0;i&lt;3;i++)
+	{
+		for(j=0;j&lt;3;j++)
+		{
+			printf("%d\t",a[i][j]);
+		}
+		printf("\n");
+	}
+//	Input of the second matrix
+	printf("\nEnter the second matrix: \n");
+	for(i=0;i&lt;3;i++)
+	{
+		for(j=0;j&lt;3;j++)
+		{
+			printf("Enter the element arr[%d][%d]: ",i,j);
+			scanf("%d",&b[i][j]);
+		}
+	}
+	printf("\nThe obtained matrix is \n");
+//	Displaying of the second matrix
+	for(i=0;i&lt;3;i++)
+	{
+		for(j=0;j&lt;3;j++)
+		{
+			printf("%d\t",b[i][j]);
+		}
+		printf("\n");
+	}
+//	Produnct matrix of the above two matrix will be
+	for(i=0;i&lt;3;i++)
+	{
+		for(n=0;n&lt;3;n++)
+		{
+			element=0;
+			for(j=0;j&lt;3;j++)
+			{
+				element+=(a[i][j]*b[j][n]);
+			}
+			result[i][n]=element;
+		}
+	}
+//	Displaying the product matrix
+	printf("\n\n\nThe result matrix we obtain after multiplication is \n");
+	for(i=0;i&lt;3;i++)
+	{
+		for(j=0;j&lt;3;j++)
+		{
+			printf("%d\t",result[i][j]);
+		}
+		printf("\n");
+	}
+	return 0;
+}
+    </pre>
+</div>
+<h2>Ouptut: </h2>
+<div class="box2">
+    <pre>
+Enter the matrix:
+
+Enter the element arr[0][0]: 2
+Enter the element arr[0][1]: 2
+Enter the element arr[0][2]: 2
+Enter the element arr[1][0]: 2
+Enter the element arr[1][1]: 2
+Enter the element arr[1][2]: 2
+Enter the element arr[2][0]: 2
+Enter the element arr[2][1]: 2
+Enter the element arr[2][2]: 2
+
+The obtained matrix is
+2       2       2
+2       2       2
+2       2       2
+
+Enter the second matrix:
+Enter the element arr[0][0]: 2
+Enter the element arr[0][1]: 2
+Enter the element arr[0][2]: 2
+Enter the element arr[1][0]: 2
+Enter the element arr[1][1]: 2
+Enter the element arr[1][2]: 2
+Enter the element arr[2][0]: 2
+Enter the element arr[2][1]: 2
+Enter the element arr[2][2]: 2
+
+The obtained matrix is
+2       2       2
+2       2       2
+2       2       2
+
+
+
+The result matrix we obtain after multiplication is
+12      12      12
+12      12      12
+12      12      12
+    </pre>
+</div>
+</div>
+   
+<div class="box">
+    <h2 id="code5">Code: </h2>
+    <strong>Enter a Matrix from user, copy it in another matrix of same size ?</strong>
+    <div class="box1">
+        <pre>
+#include &lt;stdio.h&gt;
+int main() 
+{
+    int rows, cols, i, j, A[rows][cols], B[rows][cols];
+    // Input the size of the matrix
+    printf("Enter the number of rows: ");
+    scanf("%d", &rows);
+    printf("Enter the number of columns: ");
+    scanf("%d", &cols);
+
+    // Input elements of the first matrix
+    printf("Enter the elements of the matrix A:\n");
+    for (i = 0; i &lt; rows; i++) 
+	{
+        for (j = 0; j &lt; cols; j++) 
+		{
+            printf("Enter element A[%d][%d]: ", i, j);
+            scanf("%d", &A[i][j]);
+        }
+    }
+
+    // Copy elements from matrix A to matrix B
+    for (i = 0; i &lt; rows; i++) 
+    {
+        for (j = 0; j &lt; cols; j++) 
+        {
+            B[i][j] = A[i][j];
+        }
+    }
+
+    // Display the copied matrix B
+    printf("\nThe copied matrix B is:\n");
+    for (i = 0; i &lt; rows; i++) 
+    {
+        for (j = 0; j &lt; cols; j++) 
+        {
+            printf("%d\t", B[i][j]);
+        }
+        printf("\n");
+    }
+
+    return 0;
+}
+        </pre>
+    </div>
+    <h2>Output: </h2>
+    <div class="box2">
+        <pre>
+Enter the number of rows: 3
+Enter the number of columns: 3
+
+
+Enter the elements of the matrix A:
+Enter element A[0][0]: 1
+Enter element A[0][1]: 2
+Enter element A[0][2]: 3
+Enter element A[1][0]: 4
+Enter element A[1][1]: 5
+Enter element A[1][2]: 6
+Enter element A[2][0]: 7
+Enter element A[2][1]: 8
+Enter element A[2][2]: 9
+
+The copied matrix B is:
+1       2       3
+4       5       6
+7       8       9
+        </pre>
+    </div>
+</div>
+<div class="box">
+    <h2 id="code6">Code: </h2>
+    <strong>Enter the Matrix from user, multiply it with a scalar value and display the answer?</strong>
+    <div class="box1">
+        <pre>
+#include &lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+int main() 
+{
+    int i, j, rows, cols, A[3][3], scalar, result[3][3];
+
+    // Input elements of the matrix
+    printf("Enter the elements of the matrix A:\n");
+    for (i = 0; i &lt; 3; i++) 
+	{
+        for (j = 0; j &lt; 3; j++) 
+		{
+            printf("Enter element A[%d][%d]: ", i, j);
+            scanf("%d", &A[i][j]);
+        }
+    }
+	printf("Enter the integer scalar value to multiply: ");
+    scanf("%d",&scalar);
+	
+    // Multiply each element by the scalar
+    for (i = 0; i &lt; 3; i++) 
+	{
+        for (j = 0; j &lt; 3; j++) 
+		{
+            result[i][j] = A[i][j] * scalar;
+        }
+    }
+
+    // Display the resulting matrix
+    printf("\nThe resulting matrix after multiplying with the scalar %d is:\n", scalar);
+    for (i = 0; i &lt; 3; i++) 
+	{
+        for (j = 0; j &lt; 3; j++) 
+		{
+            printf("%d\t", result[i][j]);
+        }
+        printf("\n");
+    }
+
+    return 0;
+}
+
+        </pre>
+    </div>
+    <h2>Ouput: </h2>
+    <div class="box2">
+        <pre>
+Enter the elements of the matrix A:
+Enter element A[0][0]: 10
+Enter element A[0][1]: 11
+Enter element A[0][2]: 10
+Enter element A[1][0]: 1
+Enter element A[1][1]: 1
+Enter element A[1][2]: 1
+Enter element A[2][0]: 1
+Enter element A[2][1]: 1
+Enter element A[2][2]: 1
+
+Enter the integer scalar value to multiply: 10
+
+The resulting matrix after multiplying with the scalar 10 is:
+100     110     100
+10      10      10
+10      10      10
+        </pre>
+    </div>
+
+    <h2 id="code7">Code: </h2>
+    <strong> Create a tic tac toe game using 2D Arrays.</strong>
+    <div class="box1">
+        <pre>
+
+#include &lt;stdio.h&gt;
+#define rows 3
+#define cols 3
+void printMat(char mat[rows][cols]) {
+    for (int i = 0; i &lt; rows; i++) {
+        for (int j = 0; j &lt; cols; j++) {
+            printf("%c ", mat[i][j]);
+        }
+        printf("\n");
+    }
+}
+void setMat(char mat[rows][cols], char val) {
+    for (int i = 0; i &lt; rows; i++) {
+        for (int j = 0; j &lt; cols; j++) {
+            mat[i][j] = val;
+        }
+    }
+}
+int checkMat(char mat[rows][cols]) {
+    if (mat[0][0] != ' ') {
+        if (mat[0][1] == mat[0][0]) {
+            if (mat[0][2] == mat[0][0]) // r1
+            {
+                printf("%c wins !!!", mat[0][0]);
+                return 1;
+            }
+        } else if (mat[1][0] == mat[0][0]) {
+            if (mat[2][0] == mat[0][0]) // c1
+            {
+                printf("%c wins !!!", mat[0][0]);
+                return 1;
+            }
+        } else if (mat[1][1] == mat[0][0]) {
+            if (mat[2][2] == mat[0][0]) // d1
+            {
+                printf("%c wins !!!", mat[0][0]);
+                return 1;
+            }
+        }
+    }
+    if (mat[0][1] != ' ') {
+        if (mat[1][1] == mat[0][1]) {
+            if (mat[2][1] == mat[0][1]) // c2
+            {
+                printf("%c wins !!!", mat[0][1]);
+                return 1;
+            }
+        }
+    }
+    if (mat[0][2] != ' ') {
+        if (mat[1][2] == mat[0][2]) {
+            if (mat[2][2] == mat[0][2]) // c3
+            {
+                printf("%c wins !!!", mat[0][2]);
+                return 1;
+            }
+        } else if (mat[1][1] == mat[0][2]) {
+            if (mat[0][2] == mat[2][0]) // d2
+            {
+                printf("%c wins !!!", mat[0][2]);
+                return 1;
+            }
+        }
+    }
+    if (mat[1][0] != ' ') {
+        if (mat[1][1] == mat[1][0]) {
+            if (mat[1][2] == mat[1][0]) // r2
+            {
+                printf("%c wins !!!", mat[1][0]);
+                return 1;
+            }
+        }
+    }
+    if (mat[2][0] != ' ') {
+        if (mat[2][1] == mat[2][0]) {
+            if (mat[2][2] == mat[2][0]) // r3
+            {
+                printf("%c wins !!!", mat[2][0]);
+                return 1;
+            }
+        }
+    }
+    return 0;
+}
+int insertVal(char mat[rows][cols], int pos, char val) {
+    int r = pos / 3;
+    int c = pos % 3;
+    if (mat[r][c] == ' ') {
+        mat[r][c] = val;
+        return 1;
+    } else {
+        printf("Value already exists. Try other location \n");
+        return 0;
+    }
+}
+int main() {
+    char mat[rows][cols];
+    int turn = 0, pos;
+    setMat(mat, ' ');
+    while (turn &lt; 9) {
+        printf("Enter position (0-8) : ");
+        scanf("%d", &pos);
+        if ((pos &gt;= 0) &amp;&amp; (pos &lt;= 8)) {
+            if ((turn % 2) == 0) {
+                if (insertVal(mat, pos, 'X'))
+                    turn++;
+            } else {
+                if (insertVal(mat, pos, 'O'))
+                    turn++;
+            }
+            printMat(mat);
+            if (checkMat(mat))
+                return 0;
+        } else {
+            printf("Invalid Move\n");
+        }
+    }
+    printf("DRAW!!!");
+}
+
+        </pre>
+    </div>
+    <h2>Output: </h2>
+    <div class="box2">
+        <pre>
+
+ENTER POSITION (0-8) : 0
+X X X 
+  O   
+     
+Enter position (0-8) : 1
+Value already exists. Try other location 
+Enter position (0-8) : 3
+O X X 
+  O   
+     
+Enter position (0-8) : 4
+X X X 
+  O   
+     
+Enter position (0-8) : 5
+Value already exists. Try other location 
+Enter position (0-8) : 2
+X X X 
+  O   
+     
+X wins !!!
+
+        </pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+     <div class="button">
+        <a href="#top"><button>TOP</button></a>
+    </div>
+</body>
+
+</html>

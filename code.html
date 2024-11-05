@@ -1,0 +1,34 @@
+#include&lt;stdio.h&gt;
+
+void insert(int arr[],int size)
+{
+	int i;
+	for(i=0; i&lt;7 ; i++)
+		{
+			if(i==0 && arr[i+1]&lt;arr[i])
+			{
+					printf("arr[%d]= %d", i, arr[i]);
+			}
+			else if(i==size-1 && arr[i-1]&lt;arr[i])
+			{
+					printf("arr[%d]= %d", i, arr[i]);
+			}
+			else if(arr[i-1]&lt;arr[i] && arr[i+1]&lt;arr[i])
+			{
+				printf("arr[%d]= %d", i, arr[i]);
+			}
+			printf("\t");
+		}	
+}
+int main()
+{
+	int i, arr[7];
+	printf("Enter the element of the array: ");
+	for(i=0; i&lt;7 ; i++)
+	{
+		scanf("%d",&arr[i]);
+	}
+	printf("The local maxima are: ");
+	insert(arr,7);
+	return 0;
+}

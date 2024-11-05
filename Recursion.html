@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recursion</title>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+        .box {
+            margin: 20px;
+            padding: 20px;
+            box-shadow: 1px 1px 7px 1px black;
+            font-size: 18px;
+        }
+        .box a {
+            text-decoration: none;
+            color: black;
+        }
+        .box a:hover {
+            color: rgb(44, 83, 143);
+        }
+        .box1 pre {
+            background-color:  #2F4F4F;
+            color: white;
+        }
+        .box2 pre{
+            background-color: black;
+            color: white;
+        }
+        .button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;   
+        }
+        .button button {
+            padding: 10px 15px; 
+            background-color: #1A2A6C; 
+            color: white; 
+            border: none; 
+            border-radius: 5px; 
+            cursor: pointer;
+        }
+        .button button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>RECURSION</h1>
+    </div>
+    <div class="box">
+        <ol>
+            <li><a href="#code1">CALCULATE FACTORIAL OF A NUMBER USING RECURSION ?</a></li>
+            <li><a href="#code2">CALCULATE FIBONACCI OF A NUMBER USING RECURSION ?</a></li>
+            <li><a href="#code3">CALCULATE THE SUM OF NATURAL NUMBERS TILL 10 USING RECURSION ?</a></li>
+            <li><a href="#code4">CONVERT A NUMBER INTO BINARY USING RECURSION ?</a></li>
+            <li><a href="#code5">FIND THE LARGEST ELEMENT IN THE INTEGER ARRAY USING RECURSION ?</a></li>
+            <li><a href="#code6">FIND THE SMALLEST ELEMENT IN THE INTEGER ARRAY USING RECURSION ?</a></li>
+            <li><a href="#code7">ENTER THE NUMBER FROM THE USER AND ADD ALL DIGITS OF THE NUMBER USING RECURSION ?</a></li>
+            <li><a href="#code8">FIND THE ARITHMETIC MEAN OF AN INTEGER ARRAY USING RECURSION</a></li>
+        </ol>
+    </div>
+    
+    <div class="box">
+
+        <h2 id="code1">Code: </h2>
+        <strong>CALCULATE FACTORIAL OF A NUMBER USING RECURSION</strong>
+        <div class="box1">
+            <pre>
+
+#include&lt;stdio.h&gt;
+int factorial(int n)
+{
+    if(n==0)
+    {
+        return 1;
+    }
+    else
+    {
+        return (n*factorial(n-1));
+    }
+}
+
+int main()
+{
+    int n;
+    printf("Enter the number for finding factorial :");
+    scanf("%d",&n);
+    printf("FACTORIAL OF %d = %d",n,factorial(n));
+}
+
+            </pre>
+        </div>   
+        <h2>Output: </h2> 
+        <div class="box2">
+            <pre>
+
+Enter the number for finding factorial :4
+FACTORIAL OF 4 = 24 
+
+            </pre>
+        </div>
+        <h2 id="code2">Code: </h2>
+        <strong>CALCULATE FIBONACCI OF A NUMBER USING RECURSION.</strong>
+        <div class="box1">
+            <pre>
+#include &lt;stdio.h&gt;
+
+int fibonacci(int n) 
+{
+    if (n &lt;= 1) 
+    {
+        return n;
+    }
+    return fibonacci(n - 1) + fibonacci(n - 2);
+}
+
+int main() 
+{
+    int n;
+    printf("Enter a non-negative integer: ");
+    scanf("%d", &n);
+    
+    if (n &lt; 0) 
+    {
+        printf("Fibonacci is undefined for negative numbers.\n");
+    } 
+    else 
+    {
+        printf("Fibonacci sequence up to %d:\n", n);
+        for (int i = 0; i &lt;= n; i++) 
+        {
+            printf("%d ", fibonacci(i));
+        }
+        printf("\n");
+    }
+    
+    return 0;
+}
+
+            </pre>
+        </div>   
+        <h2>Output: </h2> 
+        <div class="box2">
+            <pre>
+Enter a non-negative integer: 5
+Fibonacci sequence up to 5:
+0 1 1 2 3 5
+            </pre>
+        </div>
+        <h2 id="code3">Code: </h2>
+        <strong>CALCULATE THE SUM OF NATURAL NUMBERS TILL 10 USING RECURSION.</strong>
+        <div class="box1">
+            <pre>
+
+#include &lt;stdio.h&gt;
+
+int sumNatural(int n) 
+{
+    if (n &lt;= 0) 
+    {
+        return 0;
+    }
+    return n + sumNatural(n - 1);
+}
+
+int main() 
+{
+    int result = sumNatural(10);
+    printf("The sum of natural numbers up to 10 is: %d\n", result);
+    return 0;
+}
+
+            </pre>
+        </div>   
+        <h2>Output: </h2> 
+        <div class="box2">
+            <pre>
+
+The sum of natural numbers up to 10 is: 55  
+
+            </pre>
+        </div>
+        <h2 id="code4">Code: </h2>
+        <strong>CONVERT A NUMBER INTO BINARY USING RECURSION</strong>
+        <div class="box1">
+            <pre>
+
+#include &lt;stdio.h&gt;
+
+void printBinary(int n) 
+{
+    if (n &gt; 1) 
+    {
+        printBinary(n / 2);
+    }
+    printf("%d", n % 2);
+}
+
+int main() 
+{
+    int number;
+    printf("Enter a number: ");
+    scanf("%d", &number);
+    
+    printf("Binary representation of %d is: ", number);
+    printBinary(number);
+    printf("\n");
+    
+    return 0;
+}
+
+            </pre>
+        </div>   
+        <h2>Output: </h2> 
+        <div class="box2">
+            <pre>
+Enter a number: 100
+Binary representation of 100 is: 1100100
+            </pre>
+        </div>
+        <h2 id="code5">Code: </h2>
+        <strong>FIND THE LARGEST ELEMENT IN THE INTEGER ARRAY USING RECURSION.</strong>
+        <div class="box1">
+            <pre>
+
+#include &lt;stdio.h&gt;
+
+int findLargest(int arr[], int size) 
+{
+    if (size == 1) 
+    {
+        return arr[0];
+    }
+    
+    int largest = findLargest(arr, size - 1);
+    return arr[size - 1] &gt; largest ? arr[size - 1] : largest;
+}
+
+int main() 
+{
+    int arr[] = {3, 5, 7, 2, 8, 1, 4};
+    int size = sizeof(arr) / sizeof(arr[0]);
+    
+    int largest = findLargest(arr, size);
+    printf("The largest element in the array is: %d\n", largest);
+    
+    return 0;
+}
+
+            </pre>
+        </div>   
+        <h2>Output: </h2> 
+        <div class="box2">
+            <pre>
+
+The largest element in the array is: 8  
+
+            </pre>
+        </div>
+        <h2 id="code6">Code: </h2>
+        <strong>FIND THE SMALLEST ELEMENT IN THE INTEGER ARRAY USING RECURSION.</strong>
+        <div class="box1">
+            <pre>
+
+#include &lt;stdio.h&gt;
+
+int findLargest(int arr[], int size) 
+{
+    if (size == 1) 
+    {
+        return arr[0];
+    }
+    
+    int largest = findLargest(arr, size - 1);
+    return arr[size - 1] &gt; largest ? arr[size - 1] : largest;
+}
+
+int main() 
+{
+    int arr[] = {3, 5, 7, 2, 8, 1, 4};
+    int size = sizeof(arr) / sizeof(arr[0]);
+    
+    int largest = findLargest(arr, size);
+    printf("The largest element in the array is: %d\n", largest);
+    
+    return 0;
+}
+
+            </pre>
+        </div>   
+        <h2>Output: </h2> 
+        <div class="box2">
+            <pre>
+ 
+The smallest element in the array is: 1
+
+            </pre>
+        </div>
+
+        <h2 id="code7">Code: </h2>
+        <strong>ENTER THE NUMBER FROM THE USER AND ADD ALL DIGITS OF THE NUMBER USING RECURSION.</strong>
+        <div class="box1">
+            <pre>
+
+#include &lt;stdio.h&gt;
+
+int sumOfDigits(int n) 
+{
+    if (n == 0) 
+    {
+        return 0;
+    }
+    return (n % 10) + sumOfDigits(n / 10);
+}
+
+int main() 
+{
+    int number;
+    printf("Enter a number: ");
+    scanf("%d", &number);
+    
+    int sum = sumOfDigits(number);
+    printf("The sum of the digits is: %d\n", sum);
+    
+    return 0;
+}
+
+            </pre>
+        </div>   
+        <h2>Output: </h2> 
+        <div class="box2">
+            <pre>
+
+Enter a number: 5654
+The sum of the digits is: 20
+
+            </pre>
+        </div>
+        <h2 id="code8">Code: </h2>
+        <strong>FIND THE ARITHMETIC MEAN OF AN INTEGER ARRAY USING RECURSION.</strong>
+        <div class="box1">
+            <pre>
+
+#include &lt;stdio.h&gt;
+
+float calculateSum(int arr[], int size) 
+{
+    if (size == 0) 
+    {
+        return 0;
+    }
+    return arr[size - 1] + calculateSum(arr, size - 1);
+}
+
+float calculateMean(int arr[], int size) 
+{
+    if (size == 0) 
+    {
+        return 0; // To avoid division by zero
+    }
+    float sum = calculateSum(arr, size);
+    return sum / size;
+}
+
+int main() 
+{
+    int size, i;
+    printf("Enter the number of elements in the array: ");
+    scanf("%d", &size);
+    int arr[size];
+    printf("Enter %d elements:\n", size);
+    for (i = 0; i &lt; size; i++) 
+    {
+        scanf("%d", &arr[i]);
+    }
+
+    float mean = calculateMean(arr, size);
+    printf("The arithmetic mean of the array is: %.2f\n", mean);
+    
+    return 0;
+}
+
+            </pre>
+        </div>
+        <div class="box2">
+            <pre>
+
+Enter the number of elements in the array: 5
+Enter 5 elements:
+2
+4
+5
+52
+2222
+The arithmetic mean of the array is: 457.00  
+
+            </pre>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <div class="button">
+        <a href="#top"><button>TOP</button></a>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEARCHING ALGORITHMS</title>
+    <style>
+         html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+        .box {
+            margin: 20px;
+            padding: 20px;
+            box-shadow: 1px 1px 7px 1px black;
+            font-size: 18px;
+        }
+        .box a {
+            text-decoration: none;
+            color: black;
+        }
+        .box a:hover {
+            color: rgb(44, 83, 143);
+        }
+        .box1 pre {
+            background-color:  #2F4F4F;
+            color: white;
+        }
+        .box2 pre{
+            background-color: black;
+            color: white;
+        }
+        .button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;   
+        }
+        .button button {
+            padding: 10px 15px; 
+            background-color: #1A2A6C; 
+            color: white; 
+            border: none; 
+            border-radius: 5px; 
+            cursor: pointer;
+        }
+        .button button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>SEARCHING ALGORITHMS</h1>
+    </div>
+    <div class="box">
+        <ol>
+            <li><a href="#code1">ENTER A INTEGER ARRAY FROM THE USER, ENTER AN INTEGER VALUE AND PERFORM LINEAR SEARCH ALGORITHM THROUGH ITERATION?</a></li>
+            <li><a href="#code2">ENTER A STRING FROM THE USER, ENTER A CHARACTER AND PERFORM LINEAR SEARCH ALGORITHM THROUGH RECURSION ?</a></li>
+            <li><a href="#code3">ENTER A INTEGER ARRAY FROM THE USER, ENTER AN INTEGER VALUE AND PERFORM LINEAR SEARCH ALGORITHM THROUGH RECURSION ?</a></li>
+            <li><a href="#code4">ENTER A STRING FROM THE USER, ENTER A CHARACTER AND PERFORM LINEAR SEARCH ALGORITHM THROUGH ITERATION ?</a></li>
+            <li><a href="#code5">ENTER A INTEGER ARRAY FROM THE USER, ENTER AN INTEGER VALUE AND PERFORM BINARY SEARCH ALGORITHM THROUGH ITERATION ?</a></li>
+            <li><a href="#code6">ENTER A STRING FROM THE USER, ENTER A CHARACTER AND PERFORM BINARY SEARCH ALGORITHM THROUGH RECURSION ?</a></li>
+            <li><a href="#code7">ENTER A INTEGER ARRAY FROM THE USER, ENTER AN INTEGER VALUE AND PERFORM BINARY SEARCH ALGORITHM THROUGH RECURSION ?</a></li>
+            <li><a href="#code8">ENTER A STRING FROM THE USER, ENTER A CHARACTER AND PERFORM BINARY SEARCH ALGORITHM THROUGH ITERATION</a></li>
+            <li><a href="#code9">CALCULATE THE BEST AND WORST COMPLEXITY OF THE LINEAR SEARCHING ALGORITHM WITH EXACT TIME TAKEN BY THE ALGORITHM ON INTEGER ARRAY</a></li>
+            <li><a href="#code10">CALCULATE THE BEST AND WORST COMPLEXITY OF THE BINARY SEARCHING ALGORITHM WITH EXACT TIME TAKEN BY THE ALGORITHM ON INTEGER ARRAY</a></li>
+        </ol>
+    </div>
+    
+    <div class="box">
+
+
+            <h2 id="code1">Code: </h2>
+            <strong>ENTER A INTEGER ARRAY FROM THE USER, ENTER AN INTEGER VALUE AND PERFORM LINEAR SEARCH ALGORITHM THROUGH ITERATION.</strong>
+            <div class="box1">
+                <pre>
+
+                    #include&lt;stdio.h&gt;	
+                    #include&lt;stdlib.h&gt;
+                    
+                    void arrayinput(int *arr, int size) {
+                        int i;
+                        printf("\n");
+                        for(i = 0; i &lt; size; i++) {
+                            // user input 
+                            printf("Enter the array element arr[%d] :", i);
+                            scanf("%d", &arr[i]);
+                        }
+                    }
+                    
+                    // array output
+                    void arrayouput(int *arr, int size) {
+                        int i;
+                        printf("\n");
+                        printf("OUTPUT : ");
+                        printf("\n");
+                        for(i = 0; i &lt; size; i++) {
+                            // output
+                            printf("\t%d", arr[i]);
+                        }
+                    }
+                    
+                    void arraylinear(int *arr, int size, int item) {
+                        int i;
+                    
+                        for(i = 0; i &lt; size; i++) {
+                            if(item == arr[i]) {
+                                printf("\nThe item %d is found at index arr[%d] in linear search", item, i);
+                                break;
+                            }
+                        }
+                    
+                        if(i == size) {
+                            printf("The item is not in linear search found");	 
+                        }		
+                    }
+                    
+                    int main() {
+                        // size variable declaration
+                        int size, item;
+                        // pointer variable declaration
+                        int *arr;
+                        
+                        // user input of the size variable in the array 
+                        printf("Enter the array size: ");
+                        scanf("%d", &size);
+                        
+                        // dynamic array
+                        arr = (int *)malloc(sizeof(int) * size);
+                        
+                        // array input 
+                        arrayinput(arr, size);
+                        arrayouput(arr, size);
+                        
+                        // linear search in array 
+                        printf("\nEnter the item to linear search : ");
+                        scanf("%d", &item);
+                        
+                        // function call for the linear search
+                        arraylinear(arr, size, item);
+                        
+                        // free the allocated memory
+                        free(arr);
+                        
+                        return 0;
+                    }
+                    
+                </pre>
+            </div>
+            <h2>Output: </h2>
+            <div class="box2">
+                <pre>
+
+Enter the array size: 5
+
+Enter the array element arr[0]: 10
+Enter the array element arr[1]: 20
+Enter the array element arr[2]: 30
+Enter the array element arr[3]: 40
+Enter the array element arr[4]: 50
+
+OUTPUT:
+    10    20    30    40    50
+
+Enter the item to linear search: 30
+The item 30 is found at index arr[2] in linear search
+
+                </pre>
+            </div>
+
+            <h2 id="code2">Code: </h2>
+            <strong>ENTER A STRING FROM THE USER, ENTER A CHARACTER AND PERFORM LINEAR SEARCH ALGORITHM THROUGH RECURSION.</strong>
+            <div class="box1">
+                <pre>
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+void linearSearch(char *str, char item, int index) {
+    if (str[index] == '\0') {
+        printf("The item '%c' is not found in the string.\n", item);
+        return;
+    }
+
+    if (str[index] == item) {
+        printf("The item '%c' is found at index %d in the string.\n", item, index);
+        return;
+    }
+
+    linearSearch(str, item, index + 1);
+}
+
+int main() {
+    char str[100];
+    char item;
+
+    printf("Enter a string: ");
+    gets(str);
+    
+    printf("Enter a character to search: ");
+    scanf(" %c", &item);
+
+    linearSearch(str, item, 0);
+
+    return 0;
+}
+
+
+                </pre>
+            </div>
+            <h2>Output: </h2>
+            <div class="box2">
+                <pre>
+
+Enter a string: Hello World
+Enter a character to search: W
+The item 'W' is found at index 6 in the string.
+
+
+                </pre>
+            </div>
+
+            <h2 id="code3">Code: </h2>
+            <strong>ENTER A INTEGER ARRAY FROM THE USER, ENTER AN INTEGER VALUE AND PERFORM LINEAR SEARCH ALGORITHM THROUGH RECURSION.</strong>
+            <div class="box1">
+                <pre>
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+void arrayinput(int *arr, int size) {
+    int i;
+    printf("\n");
+    for (i = 0; i &lt; size; i++) {
+        printf("Enter the array element arr[%d]: ", i);
+        scanf("%d", &arr[i]);
+    }
+}
+
+void arrayoutput(int *arr, int size) {
+    int i;
+    printf("\nOUTPUT:\n");
+    for (i = 0; i &lt; size; i++) {
+        printf("\t%d", arr[i]);
+    }
+}
+
+int arraylinear(int *arr, int size, int item, int index) {
+    if (index &gt;= size) {
+        return -1;
+    }
+    if (arr[index] == item) {
+        return index;
+    }
+    return arraylinear(arr, size, item, index + 1);
+}
+
+int main() {
+    int size, item;
+    int *arr;
+
+    printf("Enter the array size: ");
+    scanf("%d", &size);
+    
+    arr = (int *)malloc(sizeof(int) * size);
+    
+    arrayinput(arr, size);
+    arrayoutput(arr, size);
+    
+    printf("\nEnter the item to linear search: ");
+    scanf("%d", &item);
+    
+    int result = arraylinear(arr, size, item, 0);
+    
+    if (result != -1) {
+        printf("\nThe item %d is found at index arr[%d] in linear search", item, result);
+    } else {
+        printf("The item is not found in linear search.");
+    }
+    
+    free(arr);
+    
+    return 0;
+}
+
+
+                </pre>
+            </div>
+            <h2>Output: </h2>
+            <div class="box2">
+                <pre>
+
+Enter the array size: 5
+
+Enter the array element arr[0]: 10
+Enter the array element arr[1]: 20
+Enter the array element arr[2]: 30
+Enter the array element arr[3]: 40
+Enter the array element arr[4]: 50
+
+OUTPUT:
+    10      20      30      40      50
+
+Enter the item to linear search: 30
+
+The item 30 is found at index arr[2] in linear search.
+
+
+                </pre>
+            </div>
+
+            <h2 id="code4">Code: </h2>
+            <strong>ENTER A STRING FROM THE USER, ENTER A CHARACTER AND PERFORM LINEAR SEARCH ALGORITHM THROUGH ITERATION.</strong>
+            <div class="box1">
+                <pre>
+
+#include &lt;stdio.h&gt;
+
+void linearSearch(char *str, char item) {
+    int found = 0;
+    for (int i = 0; str[i] != '\0'; i++) {
+        if (str[i] == item) {
+            printf("The item '%c' is found at index %d in the string.\n", item, i);
+            found = 1;
+            break;
+        }
+    }
+    if (!found) {
+        printf("The item '%c' is not found in the string.\n", item);
+    }
+}
+
+int main() {
+    char str[100];
+    char item;
+
+    printf("Enter a string: ");
+    gets(str);
+    
+    printf("Enter a character to search: ");
+    scanf(" %c", &item);
+
+    linearSearch(str, item);
+
+    return 0;
+}
+
+
+                </pre>
+            </div>
+            <h2>Output: </h2>
+            <div class="box2">
+                <pre>
+
+Enter a string: Hello World
+Enter a character to search: X
+The item 'X' is not found in the string.
+
+                </pre>
+            </div>
+
+            <h2 id="code5">Code: </h2>
+            <strong>ENTER A INTEGER ARRAY FROM THE USER, ENTER AN INTEGER VALUE AND PERFORM BINARY SEARCH ALGORITHM THROUGH ITERATION.</strong>
+            <div class="box1">
+                <pre>
+
+#include &lt;stdio.h&gt;	
+#include &lt;stdlib.h&gt;
+
+void arrayinput(int *arr, int size) {
+    int i;
+    printf("\n");
+    for(i = 0; i &lt; size; i++) {
+        printf("Enter the array element arr[%d] :", i);
+        scanf("%d", &arr[i]);
+    }
+}
+
+void arrayouput(int *arr, int size) {
+    int i;
+    printf("\n");
+    printf("OUTPUT : ");
+    printf("\n");
+    for(i = 0; i &lt; size; i++) {
+        printf("\t%d", arr[i]);
+    }
+}
+
+void arraybinary(int *arr, int size, int item) {
+    int min, max, mid;
+    min = 0;
+    max = size - 1;
+
+    if (item &lt; arr[0] || item &gt; arr[size - 1]) {
+        printf("Item %d is not found", item);	 
+        return;
+    } else {
+        while(min &lt;= max) {
+            mid = (min + max) / 2;
+
+            if(item == arr[mid]) {
+                printf("The item %d is found at the index arr[%d] in binary search.", item, mid);
+                break;  	
+            }  
+            else if(item &lt; arr[mid]) {
+                max = mid - 1;
+            }	
+            else if(item &gt; arr[mid]) {
+                min = mid + 1;
+            }
+        }
+    }
+}
+
+int main() {
+    int size, item;
+    int *arr;
+
+    printf("Enter the array size: ");
+    scanf("%d", &size);
+
+    arr = (int *) malloc(sizeof(int) * size);
+
+    arrayinput(arr, size);
+    arrayouput(arr, size);
+
+    printf("\nEnter the item to search: ");
+    scanf("%d", &item);
+
+    arraybinary(arr, size, item);
+
+    free(arr);
+    return 0;
+}
+
+                </pre>
+            </div>
+            <h2>Output: </h2>
+            <div class="box2">
+                <pre>
+
+Enter the array size: 5
+Enter the array element arr[0] :10
+Enter the array element arr[1] :20
+Enter the array element arr[2] :30
+Enter the array element arr[3] :40
+Enter the array element arr[4] :50
+
+OUTPUT : 
+    10      20      30      40      50
+
+Enter the item to search: 30
+The item 30 is found at the index arr[2] in binary search.
+
+
+                </pre>
+            </div>
+
+            <h2 id="code6">Code: </h2>
+            <strong>ENTER A STRING FROM THE USER, ENTER A CHARACTER AND PERFORM BINARY SE</strong>
+            <div class="box1">
+                <pre>
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+void sortString(char *str, int size) {
+    char temp;
+    for (int i = 0; i &lt; size - 1; i++) {
+        for (int j = i + 1; j &lt; size; j++) {
+            if (str[i] &gt; str[j]) {
+                temp = str[i];
+                str[i] = str[j];
+                str[j] = temp;
+            }
+        }
+    }
+}
+
+int manualLength(char *str) {
+    int length = 0;
+    while (str[length] != '\0') {
+        length++;
+    }
+    return length;
+}
+
+int binarySearch(char *str, char item, int min, int max) {
+    if (min &gt; max) {
+        return -1;
+    }
+    
+    int mid = (min + max) / 2;
+
+    if (str[mid] == item) {
+        return mid;
+    } 
+    else if (str[mid] &gt; item) {
+        return binarySearch(str, item, min, mid - 1);
+    } 
+    else {
+        return binarySearch(str, item, mid + 1, max);
+    }
+}
+
+int main() {
+    char str[100];
+    char item;
+    
+    printf("Enter a string: ");
+    gets(str);  // Using gets to read the entire string including spaces
+    
+    printf("Enter a character to search: ");
+    scanf(" %c", &item);  // Note the space before %c to skip any newline character
+    
+    int size = manualLength(str);  // Manually get the length of the string
+    sortString(str, size);  // Sort the string
+    
+    int result = binarySearch(str, item, 0, size - 1);
+    
+    if (result != -1) {
+        printf("The character '%c' is found at index %d.\n", item, result);
+    } else {
+        printf("The character '%c' is not found in the string.\n", item);
+    }
+    
+    return 0;
+}
+
+                </pre>
+            </div>
+            <h2>Output: </h2>
+            <div class="box2">
+                <pre>
+
+Enter a string: hello world
+Enter a character to search: o
+The character 'o' is found at index 6.
+
+                </pre>
+            </div>
+
+            <h2 id="code7">Code: </h2>
+            <strong> ENTER A INTEGER ARRAY FROM THE USER, ENTER AN INTEGER VALUE AND PERFORM BINARY SEARCH ALGORITHM THROUGH RECURSION.</strong>
+            <div class="box1">
+                <pre>
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int manualLength(int *arr) {
+    int length = 0;
+    while (arr[length] != '\0') {
+        length++;
+    }
+    return length;
+}
+
+void sortArray(int *arr, int size) {
+    int temp;
+    for (int i = 0; i &lt; size - 1; i++) {
+        for (int j = i + 1; j &lt; size; j++) {
+            if (arr[i] &gt; arr[j]) {
+                temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+    }
+}
+
+int binarySearch(int *arr, int item, int min, int max) {
+    if (min &gt; max) {
+        return -1;
+    }
+    
+    int mid = (min + max) / 2;
+
+    if (arr[mid] == item) {
+        return mid;
+    } 
+    else if (arr[mid] &gt; item) {
+        return binarySearch(arr, item, min, mid - 1);
+    } 
+    else {
+        return binarySearch(arr, item, mid + 1, max);
+    }
+}
+
+int main() {
+    int size, item;
+
+    printf("Enter the size of the array: ");
+    scanf("%d", &size);
+    
+    int *arr = (int *)malloc((size + 1) * sizeof(int));
+    
+    for (int i = 0; i &lt; size; i++) {
+        printf("Enter element arr[%d]: ", i);
+        scanf("%d", &arr[i]);
+    }
+    
+    arr[size] = '\0';  // Use this for manualLength
+    
+    printf("Enter an integer value to search: ");
+    scanf("%d", &item);
+    
+    sortArray(arr, size);
+    
+    int result = binarySearch(arr, item, 0, size - 1);
+    
+    if (result != -1) {
+        printf("The integer %d is found at index %d.\n", item, result);
+    } else {
+        printf("The integer %d is not found in the array.\n", item);
+    }
+    
+    free(arr);
+    
+    return 0;
+}
+
+                </pre>
+            </div>
+            <h2>Output: </h2>
+            <div class="box2">
+                <pre>
+
+Enter the size of the array: 5
+Enter element arr[0]: 4
+Enter element arr[1]: 2
+Enter element arr[2]: 5
+Enter element arr[3]: 1
+Enter element arr[4]: 3
+Enter an integer value to search: 3
+The integer 3 is found at index 2.
+
+
+                </pre>
+            </div>
+
+            <h2 id="code8">Code: </h2>
+            <strong>ENTER A STRING FROM THE USER, ENTER A CHARACTER AND PERFORM BINARY SEARCH ALGORITHM THROUGH ITERATION.</strong>
+            <div class="box1">
+                <pre>
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+void sortString(char *str) {
+    char temp;
+    for (int i = 0; str[i] != '\0'; i++) {
+        for (int j = i + 1; str[j] != '\0'; j++) {
+            if (str[i] &gt; str[j]) {
+                temp = str[i];
+                str[i] = str[j];
+                str[j] = temp;
+            }
+        }
+    }
+}
+
+int binarySearch(char *str, char item) {
+    int min = 0;
+    int max = 0;
+    while (str[max] != '\0') {
+        max++;
+    }
+    max--;  
+
+    while (min &lt;= max) {
+        int mid = (min + max) / 2;
+        if (str[mid] == item) {
+            return mid;
+        } 
+        else if (str[mid] &lt; item) {
+            min = mid + 1;
+        } 
+        else {
+            max = mid - 1;
+        }
+    }
+    return -1;
+}
+
+int main() {
+    char *str = (char *)malloc(100 * sizeof(char));
+    char item;
+
+    printf("Enter a string: ");
+    fgets(str, 100, stdin);
+
+    printf("Enter a character to search: ");
+    scanf(" %c", &item);
+
+    sortString(str);
+
+    int result = binarySearch(str, item);
+
+    if (result != -1) {
+        printf("The character '%c' is found at index %d.\n", item, result);
+    } else {
+        printf("The character '%c' is not found in the string.\n", item);
+    }
+
+    free(str);
+    
+    return 0;
+}
+
+
+                </pre>
+            </div>
+            <h2>Output: </h2>
+            <div class="box2">
+                <pre>
+
+Enter a string: hello world
+Enter a character to search: d
+The character 'd' is found at index 8.
+
+                </pre>
+            </div>
+
+            <h2 id="code9">Code: </h2>
+            <strong>CALCULATE THE BEST AND WORST COMPLEXITY OF THE LINEAR SEARCHING ALGORITHM WITH EXACT TIME TAKEN BY THE ALGORITHM ON INTEGER ARRAY.</strong>
+            <div class="box1">
+                <pre>
+
+#include &lt;stdio.h&gt;
+#include &lt;time.h&gt;
+#define maxSize 100
+int linearSearch(int arr[], int size, int ele)
+{
+    for (int i = 0; i &lt; size; i++)
+    {
+        if (arr[i] == ele)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+int main()
+{
+    int arr[maxSize];
+    int size;
+    int search;
+    int result;
+    clock_t start, end;
+    printf("ENTER SIZE OF ARRAY : ");
+    scanf("%d", &size);
+    for (int i = 0; i &lt; size; i++)
+    {
+        printf("ENTER ELEMENT %d : ", i);
+        scanf("%d", &arr[i]);
+    }
+    printf("ENTER ELEMENT TO BE SEARCHED : ");
+    scanf("%d", &search);
+    start = clock();
+    result = linearSearch(arr, size, search);
+    if (result &gt;= 0)
+    {
+        printf("ELEMENT FOUND AT INDEX %d\n", result);
+    }
+    else
+    {
+        printf("ELEMENT NOT FOUND\n");
+    }
+    end = clock();
+    printf("Executed in %fs\n", (double)(end - start) / CLOCKS_PER_SEC);
+    return 0;
+}
+
+                </pre>
+            </div>
+            <h2>Output: </h2>
+            <div class="box2">
+                <pre>
+
+ENTER SIZE OF ARRAY : 5
+ENTER ELEMENT 0 : 10
+ENTER ELEMENT 1 : 20
+ENTER ELEMENT 2 : 30
+ENTER ELEMENT 3 : 40
+ENTER ELEMENT 4 : 50
+ENTER ELEMENT TO BE SEARCHED : 30
+ELEMENT FOUND AT INDEX 2
+Executed in 0.000000s
+
+                </pre>
+            </div>
+
+            <h2 id="code10">Code: </h2>
+            <strong>CALCULATE THE BEST AND WORST COMPLEXITY OF THE BINARY SEARCHING ALGORITHM WITH EXACT TIME TAKEN BY THE ALGORITHM ON INTEGER ARRAY.</strong>
+            <div class="box1">
+                <pre>
+
+#include &lt;stdio.h&gt;
+#include &lt;time.h&gt;
+#define maxSize 100
+int binarySearch(int arr[], int size, int ele)
+{
+    int low = 0, high = size - 1, mid;
+    while (low &lt;= high)
+    {
+        mid = (high + low) / 2;
+        if (arr[mid] == ele)
+        {
+            return mid;
+        }
+        else
+        {
+            if (arr[mid] &gt; ele)
+            {
+                high = mid - 1;
+            }
+            else
+            {
+                low = mid + 1;
+            }
+        }
+    }
+    return -1;
+}
+int main()
+{
+    int arr[maxSize];
+    int size;
+    int search;
+    int result;
+    clock_t start, end;
+    printf("ENTER SIZE OF ARRAY : ");
+    scanf("%d", &size);
+    for (int i = 0; i &lt; size; i++)
+    {
+        printf("ENTER ELEMENT %d : ", i);
+        scanf("%d", &arr[i]);
+    }
+    printf("ENTER ELEMENT TO BE SEARCHED : ");
+    scanf("%d", &search);
+    start = clock();
+    result = binarySearch(arr, size, search);
+    if (result &gt;= 0)
+    {
+        printf("ELEMENT FOUND AT INDEX %d\n", result);
+    }
+    else
+    {
+        printf("ELEMENT NOT FOUND\n");
+    }
+    end = clock();
+    printf("Executed in %fs\n", (double)(end - start) / CLOCKS_PER_SEC);
+    return 0;
+}
+
+                </pre>
+            </div>
+            <h2>Output: </h2>
+            <div class="box2">
+                <pre>
+
+ENTER SIZE OF ARRAY : 5
+ENTER ELEMENT 0 : 10
+ENTER ELEMENT 1 : 20
+ENTER ELEMENT 2 : 30
+ENTER ELEMENT 3 : 40
+ENTER ELEMENT 4 : 50
+ENTER ELEMENT TO BE SEARCHED : 30
+ELEMENT FOUND AT INDEX 2
+Executed in 0.000000s
+
+                </pre>
+            </div>
+
+
+
+
+    </div>
+
+
+
+
+
+
+<div class="button">
+        <a href="#top"><button>TOP</button></a>
+    </div>
+</body>
+
+</html>
